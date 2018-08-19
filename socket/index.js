@@ -1,5 +1,10 @@
 const user = require('../controller/user')
-user.createUser()
+
+user.createUser({
+  email: '847186328@qq.com',
+  password: "123456",
+  name: 'haiping'
+})
 
 // 错误捕获
 function callbackError(cb, err) {

@@ -1,23 +1,58 @@
-const user = require('../model/user');
+const User = require('../model/user');
 const crypto = require('crypto');
-const md5 = crypto.createHash('Md')
+const md5 = crypto.createHash('md5');
+const common = require('../config/common');
+const jwt = require('jsonwebtoken');
+const JWT_KEY = require('../config/index').JWT_KEY;
+
+// 创建token
+function createToken(id) {
+    let exp = Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 7
+    let token = jwt.sign({
+        user: id, exp
+    }, JWT_KEY)
+    return token
+}
+
 module.exports = {
-    createUser: async (info) => {
+    /**
+     * 创建用户
+     */
+    async createUser(info) {
         // 是否有错误
         let requestError = false
-        let { user_email, user_name, user_password } = info
-        // 将信息添加到表中
-        let userMsg = await user.create({
-            user_email: user_email,
-            user_name: user_name,
-            user_password: "12343222",
-            user_avatar: "http://dad",
-            user_signature: "",
-            user_createTime: 12131,
-            user_updateTime: 156465
-        }).catch((err) => {
-            requestError = true
+        let { email, name, password } = info
+        const user = await User.findOne({
+            where: {
+                $or: [{ email }, { name }]
+            }
         })
-        return userMsg
+        // if (user) {
+        //     return
+        // }
+        let avatar = common.randomAvatar();
+        // 将信息添加到表中
+        password = md5.update(password, 'utf8').digest('hex')
+        let createTime = Date.now()
+        let newUser = await User.create({
+            email,
+            name,
+            password,
+            avatar,
+            signature: "",
+            createTime,
+            updateTime: createTime
+        })
+        if (!newUser) {
+            return
+        }
+        let dataValues = newUser.dataValues
+        let token = createToken(dataValues.id)
+        setTimeout(() => {
+            jwt.verify(token, JWT_KEY, function (err, decoded) {
+                console.log(err, decoded) // bar
+            })
+        }, 7000)
+
     }
 }

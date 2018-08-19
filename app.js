@@ -8,13 +8,13 @@ const logger = require('koa-logger')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
-
+const tables = require('./model/table_connect')
 // error handler
 onerror(app)
 
 // middlewares
 app.use(bodyparser({
-  enableTypes:['json', 'form', 'text']
+  enableTypes: ['json', 'form', 'text']
 }))
 app.use(json())
 app.use(logger())
