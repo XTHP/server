@@ -16,6 +16,10 @@ const ERRORS = {
     'ERROR4': {
         err: 'ERROR4',
         msg: '修改错误'
+    },
+    'ERROR5': {
+        err: 'ERROR5',
+        msg: '你创建的群组已达上限'
     }
 }
 module.exports = function (err) {
