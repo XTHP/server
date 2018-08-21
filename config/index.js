@@ -12,5 +12,6 @@ module.exports = {
         'http://haiping313.cn',
         'http://haiping313.cn',
         'http://haiping313.cn'
-    ]
+    ],
+    LETTER: ["A", "B", "C", "D", "E", "F", "G", "H", "E", "J", "K", "N", "M", "L", 'O', "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 }

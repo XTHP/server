@@ -1,4 +1,4 @@
-const AVATAR = require('./index').AVATAR
+const { AVATAR, LETTER } = require('./index')
 module.exports = {
     // 随机头像
     randomAvatar() {
@@ -30,5 +30,15 @@ module.exports = {
         return {
             month, year, date, day, hour, minutes
         }
+    },
+    // 创建随机Link码
+    createLink(len) {
+        let length = LETTER.length
+        let str = ''
+        for (let i = 0; i < len; i++) {
+            let pos = Math.floor(Math.random() * length)
+            str += LETTER[pos]
+        }
+        return str
     }
 }

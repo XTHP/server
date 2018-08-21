@@ -16,6 +16,6 @@ Group.belongsTo(User, { as: "createUser" })
 User.belongsToMany(User, { through: 'UserShield', as: 'user', foreignKey: 'shield_id' });
 User.belongsToMany(User, { through: 'UserShield', as: 'shield', foreignKey: 'user_id' });
 sequelize.sync({
-    force: true
+    force: false
 })
 module.exports = sequelize

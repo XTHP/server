@@ -31,6 +31,7 @@ let User = sequelize.define('User', {
     // 用户签名
     signature: {
         type: Sequelize.STRING,
+        defaultValue: '',
         content: '用户签名'
     },
     // 用户创建时间

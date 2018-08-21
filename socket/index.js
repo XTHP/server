@@ -1,11 +1,12 @@
 const user = require('../controller/user')
-
-user.createUser({
-  email: '847186328@qq.com',
-  password: "123456",
-  name: 'haiping'
-})
-
+const room = require('../controller/room')
+// user.loginUser({
+//   email: '847186328@qq.com',
+//   password: "123456",
+//   device:'安卓'
+// })
+// user.changeUser({id:1},{signature:"dsadasdadsad"})
+room.createRoom({ id: 1 }, { name: "dsdsd" })
 // 错误捕获
 function callbackError(cb, err) {
   console.log(err);
