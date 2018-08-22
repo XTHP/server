@@ -6,7 +6,7 @@ const room = require('../controller/room')
 //   device:'安卓'
 // })
 // user.changeUser({id:1},{signature:"dsadasdadsad"})
-room.changeRoom({ id: 1 }, { id: 1, opt: { name: "XTHP" } })
+room.initRoom({ id: 1 })
 // 错误捕获
 function callbackError(cb, err) {
   console.log(err);

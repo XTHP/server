@@ -48,7 +48,7 @@ module.exports = {
         }
         let dataValues = newUser.dataValues
         let token = createToken(dataValues.id)
-        return { isError: false, token }
+        return { code: 1, token }
     },
     /**
      * 用户登录
@@ -93,6 +93,6 @@ module.exports = {
         if (!user) {
             return Errors('ERROR1')
         }
-        return { isError: false, msg: msg }
+        return { code: 1, msg: msg }
     }
 }

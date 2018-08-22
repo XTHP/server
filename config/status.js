@@ -24,7 +24,7 @@ const ERRORS = {
 }
 module.exports = function (err) {
     let error = ERRORS[err]
-    error.isError = true
+    error.code = 0
     return error
 }
 
