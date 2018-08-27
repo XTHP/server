@@ -20,6 +20,26 @@ const ERRORS = {
     'ERROR5': {
         err: 'ERROR5',
         msg: '你创建的群组已达上限'
+    },
+    'ERROR6': {
+        err: 'ERROR6',
+        msg: '发送消息失败'
+    },
+    'ERROR7': {
+        err: 'ERROR7',
+        msg: '大于两分钟的消息不能撤回'
+    },
+    'ERROR8': {
+        err: 'ERROR8',
+        msg: '信息有误'
+    },
+    'ERROR9': {
+        err: 'ERROR9',
+        msg: '撤回失败'
+    },
+    'ERROR10': {
+        err: 'ERROR9',
+        msg: '服务器错误'
     }
 }
 module.exports = function (err) {

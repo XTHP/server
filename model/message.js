@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize')
 const sequelize = require('../dbs/dbconnect')
-// 创建用户表映射
+/**
+ * @type 创建消息表
+ */
 const message = sequelize.define('message', {
     id: {
         type: Sequelize.BIGINT(100),
@@ -11,6 +13,10 @@ const message = sequelize.define('message', {
     contentType: {
         type: Sequelize.STRING(225),
         content: '用户消息类型'
+    },
+    content: {
+        type: Sequelize.STRING,
+        comment: '消息内容'
     },
     // 用户创建消息时间
     contentTime: {

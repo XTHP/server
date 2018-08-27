@@ -4,7 +4,7 @@ const common = require('../config/common')
 const Errors = require('../config/status')
 module.exports = {
     /**
-     * 这里不需要token都能看到信息，获取房间信息
+     * 这里不需要token都能看到信息，获取房间信息,增加用户客流量
      * @param {id} info
      */
     async initRoom(info) {
@@ -15,7 +15,6 @@ module.exports = {
                 id: id
             }
         })
-        console.log(roomMsg)
         if (!roomMsg) {
             return Errors('ERROR1')
         }

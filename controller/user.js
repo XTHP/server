@@ -44,7 +44,7 @@ module.exports = {
             updateTime: createTime
         })
         if (!newUser) {
-            return Errors('ERROR1')
+            return Errors('ERROR10')
         }
         let dataValues = newUser.dataValues
         let token = createToken(dataValues.id)
@@ -68,7 +68,7 @@ module.exports = {
         user.status = device
         await user.save()
         if (!user) {
-            return Errors('ERROR3')
+            return Errors('ERROR10')
         }
         let dataValues = user.dataValues
         let token = createToken(dataValues.id)
@@ -91,8 +91,29 @@ module.exports = {
             }
         })
         if (!user) {
-            return Errors('ERROR1')
+            return Errors('ERROR10')
         }
         return { code: 1, msg: msg }
+    },
+    /**
+     * 初始化用户所有信息
+     * @param {*} info 
+     * @param {*} io 
+     */
+    async initUser(info,io){
+        let { id } = info
+        let user =await User.findOne({
+            attributes: ['id', 'name', 'avatar', 'signature', 'email'],
+            where:{
+                id: id
+            }
+        })
+        if(!user){
+            return Errors('ERROR10')
+        }
+        return {
+            code: 1,
+            self: user.dataValues
+        }
     }
 }

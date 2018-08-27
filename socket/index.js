@@ -1,12 +1,26 @@
 const user = require('../controller/user')
 const room = require('../controller/room')
+const His = require('../controller/message')
+// user.createUser({
+//     email: '847186328@qq.com',
+//     password: "123456",
+//     name:'安卓'
+// })
 // user.loginUser({
 //   email: '847186328@qq.com',
 //   password: "123456",
 //   device:'安卓'
 // })
 // user.changeUser({id:1},{signature:"dsadasdadsad"})
-room.initRoom({ id: 1 })
+// room.createRoom({id: 1},{name: "还"})
+// room.initRoom({ id: 1 })
+// His.createMsg({id: 1},{
+//   contentType: "note", content:"你好呀", isPrivate: false,roomId: 1
+// })
+user.initUser({id: 1}).then((data)=>{
+  console.log(data)
+})
+
 // 错误捕获
 function callbackError(cb, err) {
   console.log(err);

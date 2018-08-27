@@ -4,7 +4,7 @@ const Message = require('./message')
 const User = require('./user')
 
 // 指定message消息来自哪个房间
-Group.hasMany(Message, { foreignKey: "room", targetKey: "id" })
+Group.hasMany(Message, { foreignKey: "roomId", targetKey: "id" })
 // 消息是那个用户产生的
 User.hasMany(Message, { foreignKey: "ownerId", targetKey: "id" })
 // 用户所在房间列表
