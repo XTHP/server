@@ -19,6 +19,7 @@ function createToken(id) {
 module.exports = {
     /**
      * 创建用户
+     * @param {*} info 
      */
     async createUser(info) {
         // 是否有错误
@@ -52,6 +53,7 @@ module.exports = {
     },
     /**
      * 用户登录
+     * @param {email,password,device} info 
      */
     async loginUser(info) {
         let { email, password, device } = info
