@@ -17,11 +17,11 @@ const His = require('../controller/message')
 // His.createMsg({id: 1},{
 //   contentType: "note", content:"你好呀", isPrivate: false,roomId: 1
 // })
-user.initUser({
-  id: 1
-}).then((data) => {
-  console.log(data)
-})
+// user.initUser({
+//   id: 1
+// }).then((data) => {
+//   console.log(data)
+// })
 
 // 错误捕获
 function callbackError(cb, err) {
@@ -50,10 +50,10 @@ module.exports = function (io) {
       // return cb(rc);
     }));
     // 用户登录
-    socket.on("login", capture(async (info, msg, cb) => {
-      let rc = await user.loginUser(info, msg);
+    socket.on("login", async (info, cb) => {
+      let rc = await user.loginUser(info);
       return cb(rc);
-    }));
+    });
     // 用户注册
     socket.on("registered", capture(async (info, cb) => {
       let rc = await user.createUser(info);
@@ -85,7 +85,7 @@ module.exports = function (io) {
       return cb(rc)
     }));
     // 初始化所有信息
-    socket.on("init",capture(async (info,cb)=>{
+    socket.on("init", capture(async (info, cb) => {
       // let rc = await 
     }))
   });

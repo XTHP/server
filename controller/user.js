@@ -1,6 +1,5 @@
 const User = require('../model/user');
 const crypto = require('crypto');
-const md5 = crypto.createHash('md5');
 const common = require('../config/common');
 const jwt = require('jsonwebtoken');
 const JWT_KEY = require('../config/index').JWT_KEY;
@@ -34,7 +33,7 @@ module.exports = {
         }
         let avatar = common.randomAvatar();
         // 将信息添加到表中
-        password = md5.update(password, 'utf8').digest('hex')
+        password = crypto.createHash('md5').update(password, 'utf8').digest('hex')
         let createTime = Date.now()
         let newUser = await User.create({
             email,
@@ -57,24 +56,27 @@ module.exports = {
      */
     async loginUser(info) {
         let { email, password, device } = info
-        password = md5.update(password, 'utf8').digest('hex')
+        password = crypto.createHash('md5').update(password, 'utf8').digest('hex')
         const user = await User.findOne({
             attributes: ['id', 'name', 'avatar', 'signature', 'email'],
             where: {
                 $and: [{ email }, { password }]
             }
+        }).catch((err) => {
+            console.log(1)
         })
+        if (!user) {
+            return Errors('ERROR3')
+        }
         // 更新最后登录时间
         let updateTime = Date.now()
         user.updateTime = updateTime
         user.status = device
         await user.save()
-        if (!user) {
-            return Errors('ERROR10')
-        }
+
         let dataValues = user.dataValues
         let token = createToken(dataValues.id)
-        return { isError: false, token, msg: dataValues }
+        return { code: 1, token, msg: dataValues }
     },
     /**
      * 用户修改信息包括头像，个性签名等
@@ -84,7 +86,7 @@ module.exports = {
         let { id } = info
         msg = msg || {}
         // 如果是修改密码返回错误
-        if(msg.password && msg.email){
+        if (msg.password && msg.email) {
             return Errors('ERROR4')
         }
         const user = await User.update(msg, {
@@ -102,15 +104,15 @@ module.exports = {
      * @param {*} info 
      * @param {*} io 
      */
-    async initUser(info,io){
+    async initUser(info, io) {
         let { id } = info
-        let user =await User.findOne({
+        let user = await User.findOne({
             attributes: ['id', 'name', 'avatar', 'signature', 'email'],
-            where:{
+            where: {
                 id: id
             }
         })
-        if(!user){
+        if (!user) {
             return Errors('ERROR10')
         }
         return {
