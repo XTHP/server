@@ -9,9 +9,11 @@ const logger = require('koa-logger')
 const index = require('./routes/index')
 const users = require('./routes/users')
 const tables = require('./model/table_connect')
+const cors = require('koa2-cors');
 // error handler
 onerror(app)
 
+app.use(cors());
 // middlewares
 app.use(bodyparser({
   enableTypes: ['json', 'form', 'text']

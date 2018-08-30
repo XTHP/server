@@ -14,7 +14,7 @@ const socket = require("socket.io");
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '3001');
 // app.set('port', port);
 
 /**
@@ -23,9 +23,7 @@ var port = normalizePort(process.env.PORT || '3000');
 
 var server = http.createServer(app.callback());
 var io = socket(server,{
-
 })
-
 require('../socket/index')(io);
 /**
  * Listen on provided port, on all network interfaces.
@@ -87,6 +85,7 @@ function onError(error) {
  */
 
 function onListening() {
+  console.log(`listen on http://127.0.0.1:${port}`)
   var addr = server.address();
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr

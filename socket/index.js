@@ -42,8 +42,11 @@ function capture(fun) {
 }
 
 module.exports = function (io) {
-  io.on("connection", function (socket) {
+  io.on("connect", function (socket) {
     console.log("connect");
+    socket.on('disconnect',async ()=>{
+      console.log("disconnect")
+    })
     // 断线重连
     socket.on("reconnect", capture(async (info, cb) => {
       // let rc = await login(info);
